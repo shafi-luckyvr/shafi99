@@ -1,0 +1,9 @@
+---
+- name:  This is a sample shellscript playbook to create a file 
+  hosts: appServers
+  remote_user: ec2-user
+  become: true
+  
+  tasks:
+  - name: Create a files
+    shell: touch /home/ec2-user/file1.txt
