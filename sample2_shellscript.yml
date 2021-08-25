@@ -5,7 +5,7 @@
   remote_user: ec2-user
   
   tasks:
-  - name: Create a files
+  - name: Create shellscript and execute
     shell: touch /home/ec2-user/file2.txt
     shell: cd /home/ec2-user
     shell: echo "sudo yum install -y httpd" > installHttpd.sh
