@@ -1,6 +1,6 @@
 ---
 - name:  This is a sample shellscript playbook to create a file 
-  hosts: ip-172-16-0-178.us-east-2.compute.internal
+  hosts: appServers
   become: true
   
   tasks:
