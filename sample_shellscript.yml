@@ -2,6 +2,7 @@
 - name:  This is a sample shellscript playbook to create a file 
   hosts: appServers
   become: true
+  remote_user: ec2-user
   
   tasks:
   - name: Create a files
