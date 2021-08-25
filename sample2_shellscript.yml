@@ -1,0 +1,14 @@
+---
+- name:  This is a sample shellscript playbook to create a file 
+  hosts: asg
+  become: true
+  remote_user: ec2-user
+  
+  tasks:
+  - name: Create a files
+    shell: touch /home/ec2-user/file2.txt
+    shell: cd /home/ec2-user
+    shell: echo "sudo yum install -y httpd > installHttpd.sh"
+    shell: echo "sudo service httpd start >> installHttpd.sh"
+    shell: chmod 755 installHttpd.sh
+    shell: sh installHttpd.sh
