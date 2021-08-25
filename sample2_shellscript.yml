@@ -8,7 +8,7 @@
   - name: Create a files
     shell: touch /home/ec2-user/file2.txt
     shell: cd /home/ec2-user
-    shell: echo "sudo yum install -y httpd > installHttpd.sh"
-    shell: echo "sudo service httpd start >> installHttpd.sh"
+    shell: echo "sudo yum install -y httpd" > installHttpd.sh
+    shell: echo "sudo service httpd start" >> installHttpd.sh
     shell: chmod 755 installHttpd.sh
     shell: sh installHttpd.sh
