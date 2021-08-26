@@ -1,7 +1,27 @@
 ---
-- name: Get S3 files and deploy into ASG
-  amazon.aws.aws_s3:
-    bucket: s3-store-deploy-file-target-asg
-    object: /testfile.csv
-    dest: /home/ec2-user
-    mode: get
+- name: Deploying files from s3 bucket to ASG
+  hosts: asg
+  remote_user: ec2-user
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    access_key: '{{ AWS_ACCESS_KEY_ID }}'
+    secret_key: '{{ AWS_SECRET_ACCESS_KEY }}'
+
+  tasks:
+    - name: Install boto3 and botocore with pip3 module
+      pip:
+        name: 
+        - boto3
+        - botocore
+        executable: pip-3.7
+
+    - name: Download S3 files
+      aws_s3:
+        aws_access_key: '{{ access_key }}'  
+        aws_secret_key: '{{ secret_key }}'
+        bucket: s3-store-deploy-file-target-asg
+        object: testfile.csv
+        dest: /home/ec2-user/testfile.csv
+        mode: get
+ 
