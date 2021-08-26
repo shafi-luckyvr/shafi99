@@ -1,0 +1,7 @@
+---
+- name: Get S3 files and deploy into ASG
+  amazon.aws.aws_s3:
+    bucket: s3-store-deploy-file-target-asg
+    object: /testfile.csv
+    dest: /home/ec2-user
+    mode: get
