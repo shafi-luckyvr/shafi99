@@ -1,0 +1,11 @@
+---
+- name: notify
+  hosts: localhost
+  
+  tasks: 
+  - name: integration_slack
+    slack:
+      #domain: getluckyvr.slack.com
+      token: T7CJGUN66/B02CQDLDRQV/t7ISRRxH6OVs5MK4hwucJo7o
+      msg: 'testing awx slack notification' 
+      channel: '#programming'
