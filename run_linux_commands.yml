@@ -1,0 +1,32 @@
+---
+- name:  Playbook for remote command/script execution
+  hosts: all 
+  become: yes
+  #remote_user: ec2-user
+  
+  tasks:
+  - name: Run  ls -ltr command 
+    shell: ls -ltr
+  - name: Run  pwd command 
+    shell: pwd
+  - name: Run  cd $HOME command 
+    shell: cd $HOME 
+  - name: Run ping  command 
+    shell: ping 
+  - name: Run mkdir  command 
+    shell: mkdir testdir1
+  - name: Run  create a file  command 
+    shell: touch testfile1.txt 
+  - name: Run  df  command 
+    shell: df -h 
+  - name: Run grep  command 
+    shell: grep -i 'error' *.log
+  - name: Run  cat command 
+    shell: cat
+  - name: Run  find command 
+    shell: find  / -iname '*.log'
+  - name: Run  echo $USER command 
+    shell: echo $USER
+  - name: Run  echo $PATH command 
+    shell: echo $PATH
+	
