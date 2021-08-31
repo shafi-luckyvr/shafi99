@@ -29,4 +29,3 @@
     shell: echo $USER
   - name: Run  echo $PATH command 
     shell: echo $PATH
-	
