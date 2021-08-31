@@ -10,9 +10,7 @@
   - name: Run  pwd command 
     shell: pwd
   - name: Run  cd $HOME command 
-    shell: cd $HOME 
-  - name: Run ping  command 
-    shell: ping 
+    shell: cd $HOME     
   - name: Run mkdir  command 
     shell: mkdir testdir1
   - name: Run  create a file  command 
