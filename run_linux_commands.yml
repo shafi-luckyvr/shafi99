@@ -11,8 +11,6 @@
     shell: pwd
   - name: Run  cd $HOME command 
     shell: cd $HOME     
-  - name: Run mkdir  command 
-    shell: mkdir testdir1
   - name: Run  create a file  command 
     shell: touch testfile1.txt 
   - name: Run  df  command 
