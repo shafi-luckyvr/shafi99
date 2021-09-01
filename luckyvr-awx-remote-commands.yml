@@ -7,6 +7,6 @@
   - name: Return motd to registered var
     command: cat /etc/motd
     register: mymotd
-  - name: Safely use templated variable to run command. Always use the quote filter to avoid injection issues
-    command: cat {{ myfile|quote }}
+  - name: list out the files
+    command: ls -ltr 
     register: myoutput
