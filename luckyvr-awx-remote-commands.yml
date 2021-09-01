@@ -10,3 +10,11 @@
   - name: list out the files
     command: ls -ltr 
     register: myoutput
+  - name: Executing a Command Using Shell Module 
+    shell: ls -lrt > temp.txt
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
+  - name: Executing a command using command module
+    command: cat temp.txt
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
