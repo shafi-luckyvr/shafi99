@@ -25,4 +25,4 @@
         - hello2.txt 
         - hello3.txt 
     args:
-      chdir: /root/ansible
+      chdir: /var/
