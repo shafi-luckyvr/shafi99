@@ -18,3 +18,11 @@
     command: cat temp.txt
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
+  - name: Ansible command module multiple commands 
+    command: "touch {{ item }}"
+    with_items: 
+        - hello.txt 
+        - hello2.txt 
+        - hello3.txt 
+    args:
+      chdir: /root/ansible
