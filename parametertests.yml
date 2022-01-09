@@ -1,0 +1,43 @@
+--- 
+- 
+  become: true
+  hosts: all
+  name: "Playbook for remote command/script execution"
+  tasks: 
+    - 
+      name: "Run  ls -ltr command"
+      shell: "ls -ltr"
+    - 
+      name: "Run  pwd command"
+      shell: pwd
+    - 
+      name: "Run  cd $HOME command"
+      shell: "cd $HOME"
+    - 
+      name: "Run  create a file  command"
+      shell: "touch testfile1.txt"
+    - 
+      name: "Run  df  command"
+      shell: "df -h"
+    - 
+      name: "Run grep  command"
+      shell: "grep -i 'error' *.*"
+    - 
+      name: "Run  cat command"
+      shell: "cat testfile1.txt"
+    - 
+      name: "Run  find command"
+      shell: "find  / -iname '*.txt'"
+    - 
+      name: "Run  echo $USER command"
+      shell: "echo $USER"
+    - 
+      name: "Run  echo $PATH command"
+      shell: "echo $PATH"
+  vars_prompt: 
+    - 
+      name: username
+      private: false
+      prompt: "What is your username?"
+    - 
+      name: password
