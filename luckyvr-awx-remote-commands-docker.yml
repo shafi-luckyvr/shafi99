@@ -1,7 +1,7 @@
 ---
 - name:  Playbook for dockerfile/script execution
   hosts: all 
-  become: yes
+  #become: yes
   remote_user: root
   tasks:
   - name: Login to ECR 255581990649.dkr.ecr.us-east-2.amazonaws.com
@@ -11,10 +11,10 @@
     command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 
     register: myoutput
   - name: Run the container
-    shell:  docker run -itd --name api -p 8080:8080 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 /bin/sh
+    shell: sudo docker run -itd --name api -p 8080:8080 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 /bin/sh
     register: myoutput
   - name: Check the service
-    shell:  docker ps -a
+    shell: sudo docker ps -a
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
   - name: Executing a command using command module
