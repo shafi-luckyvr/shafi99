@@ -2,19 +2,19 @@
 - name:  Playbook for dockerfile/script execution
   hosts: all 
   become: yes
-  #remote_user: ec2-user
+  remote_user: root
   tasks:
   - name: Login to ECR 255581990649.dkr.ecr.us-east-2.amazonaws.com
     command: aws ecr get-login-password --region us-east-2
     register: myoutput
   - name: Pull the image from ECR Image TAG should pass from Ansiable
-    command:  docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 
+    command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 
     register: myoutput
   - name: Run the container
     shell:  docker run -itd --name api -p 8080:8080 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 /bin/sh
     register: myoutput
   - name: Check the service
-    shell:  docker ps -a | grep api
+    shell:  `docker ps -a | grep api`
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
   - name: Executing a command using command module
