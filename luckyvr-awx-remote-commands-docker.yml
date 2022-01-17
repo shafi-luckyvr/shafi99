@@ -14,7 +14,7 @@
     shell:  docker run -itd --name api -p 8080:8080 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 /bin/sh
     register: myoutput
   - name: Check the service
-    shell:  `docker ps -a | grep api`
+    shell:  docker ps -a
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
   - name: Executing a command using command module
