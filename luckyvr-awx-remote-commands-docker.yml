@@ -17,7 +17,3 @@
     shell: sudo docker ps -a
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
-  - name: Executing a command using command module
-    command: cat temp.txt
-    register: myoutput
-  - debug: msg={{ myoutput.stdout}}
