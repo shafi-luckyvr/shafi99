@@ -5,7 +5,7 @@
   #remote_user: ec2-user
   tasks:
   - name: Login to ECR 255581990649.dkr.ecr.us-east-2.amazonaws.com
-    command: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 255581990649.dkr.ecr.us-east-2.amazonaws.com
+    command: aws ecr get-login-password --region us-east-2
     register: myoutput
   - name: Pull the image from ECR Image TAG should pass from Ansiable
     command:  docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 
