@@ -13,7 +13,7 @@
     command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 
     register: myoutput
   - name: Run the container
-    shell: sudo "{{ docker_cmd }}"
+    shell: sudo {{ docker_cmd }}
     register: myoutput
   - name: Check the service
     shell: sudo docker ps -a
