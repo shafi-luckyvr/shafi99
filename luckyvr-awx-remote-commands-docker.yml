@@ -3,12 +3,9 @@
   hosts: all 
   become: yes
   remote_user: ec2-user
+  vars:
+    docker_cmd:  "{{ docker_cmd | default(docker run -itd --name api -p 8080:8080 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 /bin/sh) }}"
   tasks:
-  - name: Parameter
-      vars:
-        - docker_cmd:  "{{ docker_cmd | default(docker run -itd --name api -p 8080:8080 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:37 /bin/sh) }}"
-      include_role:
-        name: command input
   - name: Login to ECR 255581990649.dkr.ecr.us-east-2.amazonaws.com
     command: aws ecr get-login-password --region us-east-2
     register: myoutput
