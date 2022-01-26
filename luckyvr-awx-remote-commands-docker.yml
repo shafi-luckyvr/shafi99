@@ -8,16 +8,16 @@
   tasks:
   - name: Login to ECR 255581990649.dkr.ecr.us-east-2.amazonaws.com
     command: aws ecr get-login-password --region us-east-2
-    register: myoutput
+    register: myoutput1
   - name: Pull the image from ECR Image TAG should pass from Ansiable
     command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:latest 
-    register: myoutput
-  - debug: msg={{ myoutput.stdout}}  
+    register: myoutput2
+  - debug: msg={{ myoutput2.stdout}}  
   - name: Run the container
     shell: sudo {{ docker_cmd }}
-    register: myoutput
-  - debug: msg={{ myoutput.stdout}}
+    register: myoutput3
+  - debug: msg={{ myoutput3.stdout}}
   - name: Check the service
     shell: sudo docker ps -a
-    register: myoutput
-  - debug: msg={{ myoutput.stdout}}
+    register: myoutput4
+  - debug: msg={{ myoutput4.stdout}}
