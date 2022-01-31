@@ -8,9 +8,16 @@
     image_tag:  "{{ image_tag }}"
     
   tasks:
+  - name: Get ECR login password
+ #   command: aws ecr get-login-password --region us-east-2
+    command: aws ecr get-login-password --region us-east-2
+    register: ecr_login_password
+    
+  - debug: var=ecr_login_password
+  
   - name: Login to ECR 255581990649.dkr.ecr.us-east-2.amazonaws.com
  #   command: aws ecr get-login-password --region us-east-2
-    command: sudo docker login -u AWS -p "$(aws ecr get-login-password --region us-east-2)" 255581990649.dkr.ecr.us-east-2.amazonaws.com
+    command: sudo docker login -u AWS -p {{ ecr_login_password.stdout }} 255581990649.dkr.ecr.us-east-2.amazonaws.com
     register: myoutput1
   - name: Pull the image from ECR Image TAG should pass from Ansiable
  #   command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:latest 
