@@ -21,7 +21,9 @@
     command: sudo docker login -u AWS -p {{ ecr_login_password.stdout }} 255581990649.dkr.ecr.us-east-2.amazonaws.com
     register: myoutput1
   - name: Stop and remove the running container and images 
-    command:  sudo docker stop -t 120 {{ container_name }}; docker container rm -f {{ container_name }}; docker image prune -af;
+    command: sudo docker stop -t 120 {{ container_name }}
+    command: sudo docker container rm -f {{ container_name }}
+    command: sudo docker image prune -af
     register: myoutput2
   - name: Pull the image from ECR Image TAG should pass from Ansiable
  #   command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:latest 
