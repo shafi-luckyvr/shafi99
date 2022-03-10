@@ -23,7 +23,7 @@
   - name: stop tand remove the container along with images
     command:  sudo docker stop -t 60 {{ container_name }}
     command:  sudo docker container rm -f {{ container_name }}
-    command:  sudo docker image prune -af
+    #command:  sudo docker image prune -af
     register: myoutput22
   - debug: msg={{ myoutput22.stdout }}  
   - name: Pull the image from ECR Image TAG should pass from Ansiable
