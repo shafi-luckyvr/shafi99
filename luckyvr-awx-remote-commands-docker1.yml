@@ -23,7 +23,7 @@
   - name: Stop and remove the running container and images 
     command: sudo docker stop $(docker -p -q)
     register: myoutput22
-  - debug: ok1=myoutput22
+  - debug: "{{ myoutput22 }}"
   
     command: sudo docker container rm -f api
     register: myoutput23
