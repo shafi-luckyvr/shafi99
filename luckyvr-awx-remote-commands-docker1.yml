@@ -24,7 +24,6 @@
     command: sudo docker stop $(docker -p -q)
     register: myoutput22
   - debug: "{{ myoutput22 }}"
-  
     command: sudo docker container rm -f api
     register: myoutput23
     command: docker image prune -af
