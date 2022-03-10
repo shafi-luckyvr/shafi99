@@ -25,20 +25,18 @@
     register: myoutput22
     command: sudo docker container rm -f {{ container_name }}
     register: myoutput23
-  - debug: msg={{ myoutput23.stdout }}
     command: sudo docker image prune -af
     register: myoutput24
-  - debug: msg={{ myoutput24.stdout }}
   - name: Pull the image from ECR Image TAG should pass from Ansiable
  #   command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:latest 
     command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repository:{{ image_tag }}
     register: myoutput2
-  - debug: msg={{ myoutput2.stdout }}  
+  - debug: msg={{ myoutput22.stdout }}  
   - name: Run the container
     shell: sudo {{ docker_cmd }}
     register: myoutput3
-  - debug: msg={{ myoutput3.stdout }}
+  - debug: msg={{ myoutput24.stdout }}
   - name: Check the service
     shell: sudo docker ps -a
     register: myoutput4
-  - debug: msg={{ myoutput4.stdout }}
+  - debug: msg={{ myoutput23.stdout }}
