@@ -23,8 +23,9 @@
   - name: Stop and remove the running container and images 
     command: sudo docker stop $(docker -p -q)
     register: myoutput22
-  #- debug: var=myoutput22
-    command: docker container rm -f {{ container_name }}
+  - debug: ok1=myoutput22
+  
+    command: sudo docker container rm -f api
     register: myoutput23
     command: docker image prune -af
     register: myoutput24
