@@ -23,7 +23,6 @@
   - name: Stop and remove the running container and images 
     command: sudo docker stop -t 120 {{ container_name }}
     register: myoutput22
-    - debug: msg="{{ myoutput22.stdout }}"
     command: sudo docker container rm -f {{ container_name }}
     register: myoutput23
   - debug: msg={{ myoutput23.stdout }}
