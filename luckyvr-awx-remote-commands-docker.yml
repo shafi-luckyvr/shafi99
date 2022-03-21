@@ -6,6 +6,7 @@
   vars:
     docker_cmd:  "{{ docker_cmd }}"
     image_tag:  "{{ image_tag }}"
+    PRIVATEIPV4: "{{lookup('ansible_env','PRIVATEIPV4')}}"
     
   tasks:
   - name: Get ECR login password
