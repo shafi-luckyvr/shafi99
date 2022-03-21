@@ -25,7 +25,6 @@
     register: myoutput2
   - debug: msg={{ myoutput2.stdout}}  
   - name: Run the container
-    command: source /home/ec2-user/profile
     shell: source /home/ec2-user/profile 
     shell: sudo {{ docker_cmd }}
     register: myoutput3
