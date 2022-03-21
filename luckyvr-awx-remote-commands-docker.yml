@@ -25,7 +25,7 @@
     register: myoutput2
   - debug: msg={{ myoutput2.stdout}}  
   - name: Run the container
-    shell: source /home/ec2-user/profile
+    command: export NOW=$(date +"%Y%m%d-%H%M") 
     shell: sudo {{ docker_cmd }}
     register: myoutput3
   - debug: msg={{ myoutput3.stdout}}
