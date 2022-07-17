@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  PVROnlineParamASGName:
+    Description: Type ASG Group name
+    Type: String
+    Default: PVROnline-RM-Live-NginxProxy
+  PVROnlineParamImageID:
+    Description: Select AMI
+    Type: String
+    Default: ami-0f5f7c5e3fe508259
+    AllowedValues:
+      - ami-0f5f7c5e3fe508259
+      - ami-0823fb1335302e6b2
+      - ami-0445fe4b3b0c097d9
+      - ami-066157edddaec5e49
+  myInstanceType:
+    Description: Seelct EC2 instance type
+    Type: String
+    Default: t2.large
+    AllowedValues:
+      - t2.large
+      - m1.large
+      - m1.xlarge
+      
+    ConstraintDescription: must be a valid EC2 instance type.
+  PVROnlineParamEnvironmentName:
+    Description: Select environment name
+    Type: String
+    Default: live
+    AllowedValues:
+      - live
+      - dev
+Resources:
+  PVROnlineEC2ClusterContainerIAMProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      InstanceProfileName: !Ref PVROnlineParamASGName
+      Path: /
+      Roles:
+        - AWS-JENKINS-EC2-TO-ECR
+  PVROnlineEC2ClusterContainerLunchTemplate:
+    Type: 'AWS::EC2::LaunchTemplate'
+    Properties:
+      LaunchTemplateName: !Sub 'PVROnlineGreen-${AWS::StackName}'
+      LaunchTemplateData:
+        BlockDeviceMappings:
+          - Ebs:
+              VolumeSize: 35
+              VolumeType: gp2
+              DeleteOnTermination: true
+              Encrypted: true
+            DeviceName: /dev/xvda
+        ImageId: !Ref PVROnlineParamImageID
+        InstanceType: !Ref myInstanceType
+        IamInstanceProfile:
+          Arn: !GetAtt 
+            - PVROnlineEC2ClusterContainerIAMProfile
+            - Arn
+        KeyName: ec2ClusterDockerPvrOnlineKey
+        Monitoring:
+          Enabled: true
+        SecurityGroupIds:
+          - sg-04bf5d2af27353e56
+
+  PVROnlineEC2ClusterContainerASG:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    Properties:
+      AutoScalingGroupName: !Ref PVROnlineParamASGName
+      MinSize: '3'
+      MaxSize: '3'
+      DesiredCapacity: '3'
+      HealthCheckGracePeriod: 300
+      LaunchTemplate:
+        LaunchTemplateId: !Ref PVROnlineEC2ClusterContainerLunchTemplate
+        Version: !GetAtt 
+          - PVROnlineEC2ClusterContainerLunchTemplate
+          - LatestVersionNumber
+      TargetGroupARNs:
+        - arn:aws:elasticloadbalancing:us-east-2:255581990649:targetgroup/api-rmlive-nginxproxy/376a821933f744b8
+      VPCZoneIdentifier:
+        - subnet-df45a5b7
+        - subnet-c886a0b3
+        - subnet-27bede6a
+      MetricsCollection:
+        - Granularity: 1Minute
+          Metrics:
+            - GroupMinSize
+            - GroupMaxSize
+      Tags:
+        - Key: Environment
+          Value: !Ref PVROnlineParamEnvironmentName
+          PropagateAtLaunch: "true"
+        - Key: Name
+          Value: PvrOnline-RM-live-NginxProxy-EC2
+          PropagateAtLaunch: "true"
+
+Outputs:
+  ec2ClusterContainer:
+    Value: !Ref PVROnlineEC2ClusterContainerASG 
+    Description: PvrOnlineContainer ASG Name
