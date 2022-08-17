@@ -8,7 +8,7 @@
     command: sudo docker system prune -a -f
     register: mymotd
   - name: change the directory and unzip the f.zip file
-    command: cd /home/ubuntu/be
+    command: cd be
   - name: unzip the f.zip file
     command: unzip -o f.zip
     register: myoutput
