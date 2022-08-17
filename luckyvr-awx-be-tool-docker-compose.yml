@@ -5,19 +5,19 @@
   remote_user: ubuntu
   tasks:
   - name: Remove the unused container and docker images
-    command: sudo docker system prune -a -f
+    shell: sudo docker system prune -a -f
     register: mymotd
   - name: change the directory and unzip the f.zip file
     shell: cd be
   - name: unzip the f.zip file
-    shell: ls -latr
     shell: unzip -o /home/ubuntu/be/f.zip
+    shell: ls -latr
     register: myoutput
   - name: stop the docker-compose down
-    command: sudo docker-compose down
+    shell: sudo docker-compose down
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
   - name: Start the docker-compose up
-    command: sudo docker-compose up -d
+    shell: sudo docker-compose up -d
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
