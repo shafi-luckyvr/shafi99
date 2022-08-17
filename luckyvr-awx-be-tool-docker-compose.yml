@@ -1,0 +1,22 @@
+---
+- name:  Playbook for remote command/script execution
+  hosts: all 
+  become: yes
+  #remote_user: ec2-user
+  tasks:
+  - name: Remove the unused container and docker images
+    command: sudo docker system prune -a -f
+    register: mymotd
+  - name: change the directory and unzip the f.zip file
+    command: cd /home/ubuntu/be
+    command: unzip -o f.zip
+    register: myoutput
+  - name: stop the docker-compose down
+    command: sudo docker-compose down
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
+  - name: Start the docker-compose up
+    command: sudo docker-compose up -d
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
+  
