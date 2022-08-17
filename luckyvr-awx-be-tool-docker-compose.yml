@@ -10,7 +10,7 @@
   - name: change the directory and unzip the f.zip file
     shell: cd be
   - name: unzip the f.zip file
-    shell: unzip -o f.zip
+    shell: unzip -o ./f.zip
     register: myoutput
   - name: stop the docker-compose down
     command: sudo docker-compose down
