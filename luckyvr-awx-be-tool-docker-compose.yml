@@ -6,13 +6,17 @@
   tasks:
   - name: Remove the unused container and docker images
     shell: sudo docker system prune -a -f
-    register: mymotd
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
   - name: change the directory and unzip the f.zip file
     shell: cd be
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
   - name: unzip the f.zip file
     shell: unzip -o /home/ubuntu/be/f.zip
     shell: ls -latr
     register: myoutput
+  - debug: msg={{ myoutput.stdout}}
   - name: stop the docker-compose down
     shell: sudo docker-compose down
     register: myoutput
