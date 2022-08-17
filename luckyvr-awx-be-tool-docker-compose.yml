@@ -9,9 +9,10 @@
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
   - name: change the directory and unzip the f.zip file
-    shell: cd be
-    register: myoutput
-  - debug: msg={{ myoutput.stdout}}
+    shell: cd /home/ubuntu/be
+    shell: pwd
+    register: myoutput1
+  - debug: msg={{ myoutput1.stdout}}
   - name: unzip the f.zip file
     shell: unzip -o /home/ubuntu/be/f.zip
     shell: ls -latr
