@@ -20,14 +20,14 @@
  #   command: aws ecr get-login-password --region us-east-2
     command: sudo docker login -u AWS -p {{ ecr_login_password.stdout }} 255581990649.dkr.ecr.us-east-2.amazonaws.com
     register: myoutput1
- # - name: stop and remove the container along with images
- #  command:  sudo docker stop -t 60 {{ container_name }}
- #   command:  sudo docker container rm -f {{ container_name }}
- #   register: myoutput22
- # - debug: msg={{ myoutput22.stdout }}  
+  - name: stop and remove the container along with images
+    command:  sudo docker stop -t 60 {{ container_name }}
+    command:  sudo docker container rm -f {{ container_name }}
+    register: myoutput22
+  - debug: msg={{ myoutput22.stdout }}  
   - name: Pull the image from ECR Image TAG should pass from Ansiable  255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:latest
  #   command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:latest 
-    command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:latest
+    command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:{{ image_tag }}
     register: myoutput2
   - debug: msg={{ myoutput2.stdout }}  
   - name: Run the container
