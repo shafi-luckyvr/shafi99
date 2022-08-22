@@ -25,9 +25,9 @@
  #   command:  sudo docker container rm -f {{ container_name }}
  #   register: myoutput22
  # - debug: msg={{ myoutput22.stdout }}  
-  - name: Pull the image from ECR Image TAG should pass from Ansiable
+  - name: Pull the image from ECR Image TAG should pass from Ansiable  255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:latest
  #   command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:latest 
-    command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:{{ image_tag }}
+    command:  sudo docker pull 255581990649.dkr.ecr.us-east-2.amazonaws.com/dev-ecr-repo-s2s:latest
     register: myoutput2
   - debug: msg={{ myoutput2.stdout }}  
   - name: Run the container
