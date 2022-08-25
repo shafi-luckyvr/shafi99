@@ -1,0 +1,17 @@
+---
+- name:  Playbook for download nginx.conf from S3 and Restart nginx service
+  hosts: all 
+  become: yes
+  remote_user: ec2-user
+  vars:
+    docker_cmd:  "{{ s3uri }}"
+    #s3://pvronline-rmlive-nginxs-s3bucket/nginx.conf
+  tasks:
+  - name: Download Nginx.conf from S3
+    command: sudo aws s3 cp {{ s3uri }} /etc/nginx/nginx.conf
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
+  - name: Restart Nginx server
+    command: sudo systemctl restart nginx
+    register: myoutput
+  - debug: msg={{ myoutput.stdout}}
