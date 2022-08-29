@@ -13,12 +13,12 @@
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
   - name: change the directory and unzip the f.zip file
-    shell: 'cd /home/ubuntu/be/'
+    shell: 'cd /home/ubuntu/'
     shell: pwd
     register: myoutput1
   - debug: msg={{ myoutput1.stdout}}
   - name: unzip the f.zip file
-    shell: unzip -o /home/ubuntu/be/f.zip
+    shell: unzip -o /home/ubuntu/f.zip
     shell: ls -latr
     register: myoutput
   - debug: msg={{ myoutput.stdout}}
